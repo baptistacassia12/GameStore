@@ -5,5 +5,5 @@ data class Game(
     val name: String,
     val description: String,
     val imageRes: Int,
-    val item: List<GameItem>
+    val items: List<GameItem>
 ) : java.io.Serializable
