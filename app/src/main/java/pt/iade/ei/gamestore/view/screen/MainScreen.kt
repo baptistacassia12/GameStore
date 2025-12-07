@@ -1,25 +1,21 @@
 package pt.iade.ei.gamestore.view.screen
 
-import androidx.compose.material.icons.filled.History
-import androidx.compose.foundation.background
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import pt.iade.ei.gamestore.model.Game
+import pt.iade.ei.gamestore.model.Item
+import pt.iade.ei.gamestore.view.components.GameCard
 
-
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     games: List<Game>,
@@ -29,53 +25,19 @@ fun MainScreen(
         topBar = { MainTopBar() },
         bottomBar = { MainBottomBar() }
     ) { innerPadding ->
-
-        // Fundo amarelo em toda a tela
-        Box(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xFFFFF4A8)) // amarelo suave
                 .padding(innerPadding)
-
+                .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
-            Text(
-            text = "App carregada com sucesso!",
-            modifier = Modifier.padding(16.dp),
-            color = Color.Black
-        )
-
-
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(games) { game ->
-                    GameCard(
-                        game = game,
-                        onClick = { onGameClick(game) }
-                    )
-                }
+            items(games) { game ->
+                GameCard(
+                    game = game,
+                    onClick = { onGameClick(game) }
+                )
             }
         }
-    }
-}
-
-@Composable
-fun GameCard(game: Game, onClick: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(120.dp)
-            .background(Color.White)
-            .padding(16.dp)
-    ) {
-        Text(
-            text = game.name,
-            color = Color.Black,
-            fontWeight = FontWeight.Bold
-        )
     }
 }
 
@@ -83,56 +45,58 @@ fun GameCard(game: Game, onClick: () -> Unit) {
 @Composable
 fun MainTopBar() {
     TopAppBar(
-        title = {
-            Text(
-                text = "GameStore",
-                fontWeight = FontWeight.Bold
-            )
-        },
-        modifier = Modifier
-            .background(Color(0xFFFFF4A8))
+        title = { Text(text = "GameStore") }
     )
 }
 
 @Composable
 fun MainBottomBar() {
-    NavigationBar(
-        containerColor = Color(0xFFFFF4A8)
-    ) {
+    NavigationBar {
         NavigationBarItem(
             selected = true,
-            onClick = {},
-            icon = {
-                Icon(
-                    imageVector = Icons.Filled.Home,
-                    contentDescription = "Destaque"
-                )
-            },
+            onClick = { },
+            icon = { Icon(Icons.Filled.Star, contentDescription = null) },
             label = { Text("Destaque") }
         )
-
         NavigationBarItem(
             selected = false,
-            onClick = {},
-            icon = {
-                Icon(
-                    imageVector = Icons.Filled.History,
-                    contentDescription = "Histórico"
-                )
-            },
-            label = { Text("Histórico") }
-        )
-
-        NavigationBarItem(
-            selected = false,
-            onClick = {},
-            icon = {
-                Icon(
-                    imageVector = Icons.Filled.Person,
-                    contentDescription = "Perfil"
-                )
-            },
+            onClick = { },
+            icon = { Icon(Icons.Filled.Person, contentDescription = null) },
             label = { Text("Perfil") }
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MainScreenPreview() {
+    val mockGames = listOf(
+        Game(
+            id = "1",
+            title = "Legends of Ember",
+            shortDescription = "RPG de aventura",
+            longDescription = "Explore mundos mágicos e lute contra criaturas.",
+            imageResName = "ic_launcher_foreground",
+            items = emptyList<Item>(),
+            imageRes = 0,
+            description = "Um RPG cheio de aventura",
+            name = "Legends of Ember"
+        ),
+        Game(
+            id = "2",
+            title = "Frozen Bastion",
+            shortDescription = "Defende o reino gelado",
+            longDescription = "Protege o reino contra invasores.",
+            imageResName = "ic_launcher_foreground",
+            items = emptyList<Item>(),
+            imageRes = 0,
+            description = "Defende o reino gelado",
+            name = "Frozen Bastion"
+        )
+    )
+
+    MainScreen(
+        games = mockGames,
+        onGameClick = { }
+    )
 }

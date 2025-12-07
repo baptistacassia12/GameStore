@@ -1,40 +1,56 @@
 package pt.iade.ei.gamestore.controller
 
-
-import pt.iade.ei.gamestore.R
 import pt.iade.ei.gamestore.model.Game
-import pt.iade.ei.gamestore.model.GameItem
+import pt.iade.ei.gamestore.model.Item
 
 object GameController {
+
     fun getGamesList(): List<Game> {
-        // Lista de itens para cada jogo
-        val items1 = listOf(
-            GameItem(1, "Espada de Fogo", "Uma espada lendária.", 9.99, R.drawable.ic_launcher_foreground),
-            GameItem(2, "Escudo de Gelo", "Proteção mágica.", 7.49, R.drawable.ic_launcher_foreground)
+
+        val items = listOf(
+            Item(
+                id = "1",
+                name = "Espada Flamejante",
+                description = "Uma espada lendária com poder de fogo.",
+                price = 9.99,
+                imageResName = "item_sword"
+            ),
+            Item(
+                id = "2",
+                name = "Escudo de Gelo",
+                description = "Proteção mágica contra ataques.",
+                price = 7.49,
+                imageResName = "item_shield"
+            )
         )
 
-        val items2 = listOf(
-            GameItem(3, "Arco Fantasma", "Arma à distância etérea.", 11.99, R.drawable.ic_launcher_foreground),
-            GameItem(4, "Poção de Vida", "Restaura energia.", 4.99, R.drawable.ic_launcher_foreground)
+        return listOf(
+            Game(
+                id = "1",
+                title = "Legends of Ember",
+                shortDescription = "RPG de aventura",
+                longDescription = "Explore mundos mágicos e lute contra criaturas.",
+                imageResName = "game_ember",
+                items = items,
+                imageRes = 0,
+                 "Um RPG cheio de aventura",
+                name = "Legends of Ember"
+            ),
+            Game(
+                id = "2",
+                title = "Frozen Bastion",
+                shortDescription = "Defende o reino gelado",
+                longDescription = "Protege o reino contra invasores.",
+                imageResName = "game_frozen",
+                items = items,
+                imageRes = 0,
+                description = "Defende o reino gelado",
+                name = "Frozen Bastion"
+            )
         )
-
-
-        val game1 = Game(
-            id = 1,
-            name = "Legends of Ember",
-            description = "Um RPG cheio de aventuras.",
-            imageRes = R.drawable.ic_launcher_foreground,
-            items = items1
-        )
-
-        val game2 = Game(
-            id = 2,
-            name = "Frozen Bastion",
-            description = "Defende o reino gelado.",
-            imageRes = R.drawable.ic_launcher_foreground,
-            items = items2
-        )
-
-        return listOf(game1, game2)
     }
 }
+
+
+
+

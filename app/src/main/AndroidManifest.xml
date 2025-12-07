@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameStore">
         <activity
-            android:name=".GameDetailActivity"
+            android:name=".controller.GameDetailActivity"
             android:exported="false" />
 
         <activity
@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="pt.iade.ei.gamestore.view.screen.GameDetailActivity" />
     </application>
 
 </manifest>
