@@ -1,5 +1,6 @@
 package pt.iade.ei.gamestore.view.screen
 
+import androidx.compose.material.icons.filled.History
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -63,7 +64,19 @@ fun MainScreen(
 
 @Composable
 fun GameCard(game: Game, onClick: () -> Unit) {
-    TODO("Not yet implemented")
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(120.dp)
+            .background(Color.White)
+            .padding(16.dp)
+    ) {
+        Text(
+            text = game.name,
+            color = Color.Black,
+            fontWeight = FontWeight.Bold
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -77,7 +90,7 @@ fun MainTopBar() {
             )
         },
         modifier = Modifier
-            .background(Color(0xFFFFF4A8)) // fundo amarelo
+            .background(Color(0xFFFFF4A8))
     )
 }
 
